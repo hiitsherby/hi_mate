@@ -17,7 +17,8 @@ var express 		= require('express'),
 
 	
 // seedDB();
-mongoose.connect("mongodb://localhost/hi_mate");
+// mongoose.connect("mongodb://localhost/hi_mate");
+mongoose.connect("mongodb://hiitsherby:WenYen0u0@ds123926.mlab.com:23926/himate");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname+'/public'));
 app.set("view engine", "ejs");
