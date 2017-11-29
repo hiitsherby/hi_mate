@@ -19,7 +19,7 @@ router.get('/', function(req, res){
 //==============
 //POST DASHBOARD
 //==============
-router.post('/', function(req, res){
+router.post('/',  middleware.isLoggedIn, function(req, res){
 	//form and push to content array
 	var title		= req.body.title;
 	var location	= req.body.location;
@@ -45,9 +45,11 @@ router.post('/', function(req, res){
 		}
 	];
 	//create a new himate and save to db
-	hiMate.create(newContent, middleware.isLoggedIn, function(err, newContent){
+	hiMate.create(newContent, function(err, newContent){
 		if (err){
 			console.log(err);
+			req.flash('error', err.message);
+			res.redirect('back');
 		}else {
 			//redirect to dashboard
 			res.redirect('/dashboard');
