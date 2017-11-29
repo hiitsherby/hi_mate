@@ -1,0 +1,89 @@
+<% include ../partials/header %>
+
+<div class="row">
+    <div class="col-md-3">
+        <p class="lead">hiMate</p>
+        <div class="list-group">
+            <li class="list-group-item active">item1</li>
+            <li class="list-group-item">item2</li>
+            <li class="list-group-item">item3</li>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="thumbnail panel panel-info">
+          <!-- info panel contents -->
+          <div class="panel-heading">
+              <h3><%= foundContent.title%></h3>
+              <% if(currentUser && foundContent.author.id.equals(currentUser._id)){ %>
+                  <a class="btn btn-sm btn-warning" href="/dashboard/<%= foundContent._id%>/edit">Edit</a>
+                  <form id="delete-form" action="/dashboard/<%= foundContent._id%>?_method=DELETE" method="POST">
+                      <button class="btn btn-sm btn-danger">Delete</button>
+                  </form>
+              <% } %>      
+          </div>
+          <!-- Table -->
+          <table class="table">
+            <tr>
+                <th>Location:</th>
+                <td><%= foundContent.location%></td>
+            </tr>
+            <tr>
+                <th>Time:</th>
+                <td><%= foundContent.time%></td>
+            </tr>
+            <tr>
+                <th>Requirements:</th>
+                <td><%= foundContent.requirement%></td>
+            </tr>
+            <tr>
+                <th>Contact:</th>
+                <td><%= foundContent.contact%></td>
+            </tr>
+            <tr>
+                <th>Description:</th>
+                <td><%= foundContent.text%></td>
+            </tr>
+            <tr>
+                <th>Tags:</th>
+                <td><%= foundContent.hashtags%></td>
+            </tr>
+            <tr>
+                <th>Submitted by:</th>
+                <td><%= foundContent.author.username%></td>
+            </tr>
+          </table>
+        </div>
+        <div class="well">
+            <div class="text-right">
+                <a class="btn btn-success" href="/dashboard/<%= foundContent._id%>/comments/new">Add a Comment</a>
+           </div>
+                <% foundContent.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong><%= comment.author.username %></strong>
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <a class="btn btn-sm btn-warning" href="/dashboard/<%= foundContent._id%>/comments/<%=comment._id%>/edit">Edit</a>
+                                <form id="delete-form" action="/dashboard/<%= foundContent._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                              </form>
+                            <% } %> 
+                            <span class="pull-right">10 days ago</span>
+                            <p>"<%= comment.text %>"</p>
+                        </div>
+                    </div>
+                    
+                <% }) %>
+ 
+            
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+<% include ../partials/footer %>

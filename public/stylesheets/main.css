@@ -1,0 +1,31 @@
+.table>tbody>tr>td, .table>tbody>tr>th {
+    padding: 20px !important;
+}
+#delete-form{
+    display: inline;
+}
+
+.fader{
+    -webkit-animation-name: fader; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 0.3s; /* Safari 4.0 - 8.0 */
+    animation-name: fader;
+    animation-duration: 0.3s;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes fader {
+    0%   {opacity: 0}
+    25%  {opacity: 0.25}
+    50%  {opacity: 0.5}
+    75%  {opacity: 0.75}
+    100% {opacity: 1}
+}
+
+/* Standard syntax */
+@keyframes fader {
+    0%   {opacity: 0}
+    25%  {opacity: 0.25}
+    50%  {opacity: 0.5}
+    75%  {opacity: 0.75}
+    100% {opacity: 1}
+}

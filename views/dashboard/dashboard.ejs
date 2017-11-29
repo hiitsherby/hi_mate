@@ -1,0 +1,24 @@
+<% include ../partials/header %>
+	<header class="jumbotron">
+		<h1>Welcome to hiMate</h1>
+		<p>Find your mates from all over the campus.</p>
+		<a class="btn btn-primary btn-lg" href="dashboard/new">Add New Mate</a>
+	</header>
+
+	
+	<div class="row text-center" style="display:flex; flex-wrap:wrap">
+		<% content.forEach(function(x){ %>
+		<div class="col-md-3 col-sm-6">
+			<div class="thumbnail">	
+				<h4><%= x.title %></h3>
+				<div class="caption">
+					<p>
+						<a class="btn btn-primary" href="/dashboard/<%= x._id %>">More Info</a>
+					</p>
+					<h5>Tags: <%= x.hashtags %></h5>
+				</div>						
+			</div>
+		</div>
+		<% }) %>
+	</div>
+<% include ../partials/footer %>
