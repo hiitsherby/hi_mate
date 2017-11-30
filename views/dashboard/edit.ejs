@@ -4,24 +4,31 @@
 <div style="width:30%; margin:20px auto">
 	<form action="/dashboard/<%=foundContent._id%>?_method=PUT" method="POST">
 		<div class="form-group">
+			<label for="title">Title</label>
 			<input class="form-control" type="text" name="edit[title]" value="<%=foundContent.title%>">
 		</div>
 		<div class="form-group">
-			<input class="form-control" type="text" name="edit[location]" value="<%=foundContent.location%>">
+			<label for="location">Location</label>
+			<input class="form-control" type="text" name="location" id="location" value="<%=foundContent.location%>">
 		</div>
 		<div class="form-group">
+			<label for="time">Time</label>
 			<input class="form-control" type="text" name="edit[time]" value="<%=foundContent.time%>">
 		</div>
 		<div class="form-group">
+			<label for="requirement">Requirements</label>
 			<input class="form-control" type="text" name="edit[requirement]" value="<%=foundContent.requirement%>">
 		</div>
 		<div class="form-group">
+			<label for="contact">Contact</label>
 			<input class="form-control" type="text" name="edit[contact]" value="<%=foundContent.contact%>">
 		</div>
 		<div class="form-group">
+			<label for="text">Text</label>
 			<textarea class="form-control" type="text" name="edit[text]"><%=foundContent.text%></textarea>
 		</div>
 		<div class="form-group">
+			<label for="hashtags">Hashtags</label>
 			<input class="form-control" type="text" name="edit[hashtags]" value="<%=foundContent.hashtags%>">
 		</div>
 	<button class="btn btn-lg btn-primary btn-block">Submit!</button>

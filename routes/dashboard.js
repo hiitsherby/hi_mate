@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var hiMate   = require('../models/dashboard');
 var middleware = require('../middleware');
+var geocoder = require('geocoder');
 
 //=============
 //GET DASHBOARD
@@ -16,6 +17,7 @@ router.get('/', function(req, res){
 		}
 	});
 });
+
 //==============
 //POST DASHBOARD
 //==============
@@ -32,8 +34,11 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			id: req.user._id,
 			username: req.user.username
 	};
-	var newContent	= [
-		{
+	geocoder.geocode(req.body.location, function (err, data) {
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    var location = data.results[0].formatted_address;
+	var newContent	= {
 			title:title,
 			location:location, 
 			time:time,
@@ -42,8 +47,8 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			author: author,
 			text:text, 
 			hashtags:hashtags,
-		}
-	];
+			location: location, lat: lat, lng: lng
+		};
 	//create a new himate and save to db
 	hiMate.create(newContent, function(err, newContent){
 		if (err){
@@ -55,6 +60,7 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			res.redirect('/dashboard');
 		}
 	});
+  });
 });
 //=================
 //GET DASHBOARD NEW
@@ -94,8 +100,13 @@ router.get('/:id/edit', middleware.postOwnership, function(req, res){
 //UPDATE DASHBOARD
 //================
 router.put('/:id', middleware.postOwnership, function(req, res){
+	geocoder.geocode(req.body.location, function (err, data) {
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    var location = data.results[0].formatted_address;
+    var newData = req.body.edit + {location: location, lat: lat, lng: lng};
 	//update correspondant himate and save to db
-	hiMate.findByIdAndUpdate(req.params.id, req.body.edit, function(err, editContent){
+	hiMate.findByIdAndUpdate(req.params.id, newData, function(err, editContent){
 		if (err){
 			console.log(err);
 			req.flash('error', err.message);
@@ -106,6 +117,7 @@ router.put('/:id', middleware.postOwnership, function(req, res){
 			res.redirect('/dashboard/'+req.params.id);
 		}
 	});	
+  });
 });
 //================
 //DELETE DASHBOARD

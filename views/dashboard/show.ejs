@@ -8,6 +8,7 @@
             <li class="list-group-item">item2</li>
             <li class="list-group-item">item3</li>
         </div>
+        <div id="map"></div>
     </div>
     <div class="col-md-9">
         <div class="thumbnail panel panel-info">
@@ -85,5 +86,33 @@
 
 
 
+<script>
+  function initMap() {
+    var lat = <%= foundContent.lat %>;
+    var lng = <%= foundContent.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= foundContent.name %><br />
+      <%= foundContent.location %></strong>
+      <p><%= foundContent.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6WuNmyMxlCsDp-bkhkRAmaM1B_3smWkk&callback=initMap"></script>
 
 <% include ../partials/footer %>

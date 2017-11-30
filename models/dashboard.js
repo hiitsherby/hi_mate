@@ -5,6 +5,9 @@ var hiMateSchema = new mongoose.Schema({
 	time: String,
 	requirement: String,
 	contact: String,
+	location: String,
+	lat: Number,
+	lng: Number,
 	author: {
 		id:{
 			type: mongoose.Schema.Types.ObjectId,
