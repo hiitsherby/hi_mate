@@ -37,5 +37,12 @@
 	<a href="/dashboard">Go Back</a>
 </div>
 </div>
-
+  <script>
+      function initMap() {
+        var input = document.getElementById('location');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6WuNmyMxlCsDp-bkhkRAmaM1B_3smWkk&libraries=places&callback=initMap"
+        async defer></script>
 <% include ../partials/footer %>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>LoopLAB Theme</title>
+  <title>hiMate</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         <link rel="stylesheet" href="/stylesheets/landing.css">
         <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
@@ -12,7 +12,7 @@
 <body id="home" style="color:white">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
     <div class="container">
-      <a href="index.html" class="navbar-brand">LoopLAB</a>
+      <a href="index.html" class="navbar-brand">hiMate</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -22,14 +22,23 @@
             <a href="#home" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#explore-head-section" class="nav-link">Explore</a>
+            <a href="/dashboard" class="nav-link">View all mates</a>
           </li>
-          <li class="nav-item">
-            <a href="#create-head-section" class="nav-link">Create</a>
-          </li>
-          <li class="nav-item">
-            <a href="#share-head-section" class="nav-link">Share</a>
-          </li>
+          <% if (!currentUser){ %>
+            <li class="nav-item">
+              <a href="/login" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="/register" class="nav-link">Sign Up</a>
+            </li>
+  				<% }else{ %>
+  					<li class="nav-item">
+  					  <a href="" class="nav-link">Welcome <%= currentUser.username %></a>
+  					</li>
+  					<li class="nav-item">
+  					  <a href="/logout" class="nav-link">Logout</a>
+  					 </li>
+  				<% } %>
         </ul>
       </div>
     </div>
@@ -40,7 +49,7 @@
   <style>
     #home-section {
       color: white;
-      opacity: 0.7;
+      opacity: 0.8;
       background: url("http://hdwarena.com/wp-content/uploads/2017/04/Beautiful-Wallpaper.jpg") no-repeat !important;
       background-size: cover !important;
       background-attachment: fixed !important;
@@ -60,13 +69,13 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-8 d-none d-lg-block">
-              <h1 class="display-4">Build <strong>social profiles</strong> and gain revenue and <strong>profits</strong></h1>
+              <h1 class="display-4">Find <strong>partners</strong> and work on exciting new projects with <strong>new mates</strong></h1>
               <div class="d-flex flex-row">
                 <div class="p-4 align-self-start">
                   <i class="fa fa-check-square fa-3x"></i>
                 </div>
                 <div class="p-4 align-self-end">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, architecto, quaerat. Quis cum eius itaque ipsa magni quam, illo molestias
+                  Search by projects and locations. Explore new possibilities around your neighborhood. Checkout what projects are going on around you.
                 </div>
               </div>
 
@@ -75,7 +84,7 @@
                   <i class="fa fa-check-square fa-3x"></i>
                 </div>
                 <div class="p-4 align-self-end">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, architecto, quaerat. Quis cum eius itaque ipsa magni quam, illo molestias
+                  Make social connects while working on brilliant portfolios. Meet new people with different professional background and hobbies. Explore new possibilities.
                 </div>
               </div>
 
@@ -84,7 +93,7 @@
                   <i class="fa fa-check-square fa-3x"></i>
                 </div>
                 <div class="p-4 align-self-end">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas, architecto, quaerat. Quis cum eius itaque ipsa magni quam, illo molestias
+                  Find your new mates and join cool projects. Unlimited access to new posts and manage your own posts. Leave comments and save to your wishlist and come back anytime.
                 </div>
               </div>
             </div>

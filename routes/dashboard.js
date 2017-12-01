@@ -35,6 +35,7 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			username: req.user.username
 	};
 	geocoder.geocode(req.body.location, function (err, data) {
+		console.log('data.results[0]',data);
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;
@@ -101,6 +102,7 @@ router.get('/:id/edit', middleware.postOwnership, function(req, res){
 //================
 router.put('/:id', middleware.postOwnership, function(req, res){
 	geocoder.geocode(req.body.location, function (err, data) {
+		console.log('data.results[0]',data);
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;
