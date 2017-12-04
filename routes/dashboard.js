@@ -4,6 +4,10 @@ var hiMate   = require('../models/dashboard');
 var middleware = require('../middleware');
 var geocoder = require('geocoder');
 
+//==============
+//Google Map API
+//==============
+
 //=============
 //GET DASHBOARD
 //=============
@@ -13,7 +17,10 @@ router.get('/', function(req, res){
 		if (err){
 			console.log(err);
 		}else {
-			res.render('dashboard/dashboard', {content:dbContent, currentUser: req.user});
+			var locations = {}, list = [];
+			dbContent.forEach(function(x){locations.lat = x.lat; locations.lng = x.lng; list.push(locations) });
+			res.render('dashboard/dashboard', {content:dbContent, currentUser: req.user, locations: list});
+			console.log('list',typeof list);
 		}
 	});
 });
