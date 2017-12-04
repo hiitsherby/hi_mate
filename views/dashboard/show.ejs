@@ -11,9 +11,9 @@
         <div id="map"></div>
     </div>
     <div class="col-md-9">
-        <div class="thumbnail panel panel-info">
+        <div class="thumbnail card">
           <!-- info panel contents -->
-          <div class="panel-heading">
+          <div class="card-header bg-dark text-white">
               <h3><%= foundContent.title%></h3>
               <% if(currentUser && foundContent.author.id.equals(currentUser._id)){ %>
                   <a class="btn btn-sm btn-warning" href="/dashboard/<%= foundContent._id%>/edit">Edit</a>
@@ -23,7 +23,7 @@
               <% } %>      
           </div>
           <!-- Table -->
-          <table class="table">
+          <table class="table table-hover">
             <tr>
                 <th>Location:</th>
                 <td><%= foundContent.location%></td>
@@ -54,7 +54,8 @@
             </tr>
           </table>
         </div>
-        <div class="well">
+        <div class="card bg-light">
+            <div class="card-body">
             <div class="text-right">
                 <a class="btn btn-success" href="/dashboard/<%= foundContent._id%>/comments/new">Add a Comment</a>
            </div>
@@ -74,8 +75,7 @@
                     </div>
                     
                 <% }) %>
- 
-            
+            </div>
         </div>
         
     </div>

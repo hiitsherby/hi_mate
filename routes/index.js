@@ -10,6 +10,16 @@ router.get('/', function(req, res){
 	res.render('landing2');
 });
 
+//============
+//USER ACCOUNT
+//============
+router.get('/user', function(req, res) {
+    res.render('user');
+})
+
+router.get('/profile', function(req, res) {
+	res.render('profile');    
+})
 
 //===========
 //AUTH ROUTES

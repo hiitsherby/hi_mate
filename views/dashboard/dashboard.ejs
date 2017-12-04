@@ -1,8 +1,8 @@
 <% include ../partials/header %>
-	<header class="jumbotron">
+	<header class="jumbotron bg-light">
 		<h1>Welcome to hiMate</h1>
 		<p>Find your mates from all over the campus.</p>
-		<a class="btn btn-primary btn-lg" href="dashboard/new">Add New Mate</a>
+		<a class="btn btn-outline-dark btn-lg" href="dashboard/new">Add New Mate</a>
 	</header>
 	<div class="row">
 	<div class="col-lg-10 col-md-10 col-sm-10" id="map" height="460px" width="100%"></div>
@@ -22,14 +22,20 @@
 	<div class="row text-center" style="display:flex; flex-wrap:wrap">
 		<% content.forEach(function(x){ %>
 		<div class="col-md-3 col-sm-6">
-			<div class="thumbnail">	
-				<h4><%= x.title %></h3>
-				<div class="caption">
+			<div class="card">	
+			  <div class="card-body">
+				<h5 class="card-title"><%= x.title %></h5>
+				<div class="card-text">
 					<p>
-						<a class="btn btn-primary" href="/dashboard/<%= x._id %>">More Info</a>
+						<a class="btn btn-outline-dark" href="/dashboard/<%= x._id %>">More Info</a>
 					</p>
-					<h5>Tags: <%= x.hashtags %></h5>
-				</div>						
+					<h6 class="card-footer bg-light">
+					  Tags: <% x.hashtags.split(',').forEach(function(x){ %>
+					  <span class="badge badge-dark"><%= x %></span>
+					  <% }) %></span>
+					</h6>
+				</div>
+				</div>
 			</div>
 		</div>
 		<% }) %>
@@ -60,7 +66,7 @@
         var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
       }
-      var locations = <%= locations %>
+      <!--var locations = <%= locations %>-->
       // var locations = [
       //   {lat: -31.563910, lng: 147.154312},
       //   {lat: -33.718234, lng: 150.363181},
