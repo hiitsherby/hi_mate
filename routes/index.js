@@ -45,6 +45,23 @@ router.post('/register', function(req, res){
 	});
 });
 
+//handle signup logic of landing page
+router.post('/', function(req, res){
+	var newUser = new User({username: req.body.username});
+	User.register(newUser, req.body.password, function(err, user){
+		if (err){
+			console.log(err);
+			req.flash('error', err.message);
+			res.redirect('/register');
+		}else{
+			passport.authenticate('local')(req, res, function(){
+				req.flash('success', 'successfully signed up. Nice to meet you '+newUser.username);
+				res.redirect('/dashboard');	
+			});
+		}
+	});
+});
+
 //show login form
 router.get('/login', function(req, res){
 	res.render('login');	
