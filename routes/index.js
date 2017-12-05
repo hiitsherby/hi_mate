@@ -1,6 +1,8 @@
 var express  = require('express');
 var router   = express.Router();
 var passport = require('passport');
+var hiMate   = require('../models/dashboard');
+var middleware = require('../middleware');
 var User     = require('../models/user');
 
 //=======
@@ -13,13 +15,26 @@ router.get('/', function(req, res){
 //============
 //USER ACCOUNT
 //============
-router.get('/user', function(req, res) {
-    res.render('user');
-})
+router.get('/user', middleware.isLoggedIn, function(req, res) {
+	hiMate.find({}, function(err, dbContent){
+		if (err){
+			console.log(err);
+			req.flash('error', err.message);
+		}else {
+			var pushContent = [];
+			dbContent.forEach(function(post){
+				if (req.user._id.equals(post.author.id)){
+					pushContent.push(post);
+				}
+			});
+			res.render('user', {content:pushContent});
+		}
+	});
+});
 
-router.get('/profile', function(req, res) {
+router.get('/profile', middleware.isLoggedIn, function(req, res) {
 	res.render('profile');    
-})
+});
 
 //===========
 //AUTH ROUTES

@@ -53,60 +53,23 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td scope="row">1</td>
-                  <td>Post One</td>
-                  <td>Web Development</td>
-                  <td>July 12, 2017</td>
-                  <td><a href="details.html" class="btn btn-secondary">
-                    <i class="fa fa-angle-double-right"></i> Details
-                  </a></td>
-                </tr>
-                <tr>
-                  <td scope="row">2</td>
-                  <td>Post Two</td>
-                  <td>Tech Gadgets</td>
-                  <td>July 13, 2017</td>
-                  <td><a href="details.html" class="btn btn-secondary">
-                    <i class="fa fa-angle-double-right"></i> Details
-                  </a></td>
-                </tr>
-                <tr>
-                  <td scope="row">3</td>
-                  <td>Post Three</td>
-                  <td>Web Development</td>
-                  <td>July 14, 2017</td>
-                  <td><a href="details.html" class="btn btn-secondary">
-                    <i class="fa fa-angle-double-right"></i> Details
-                  </a></td>
-                </tr>
-                <tr>
-                  <td scope="row">4</td>
-                  <td>Post Four</td>
-                  <td>Business</td>
-                  <td>July 14, 2017</td>
-                  <td><a href="details.html" class="btn btn-secondary">
-                    <i class="fa fa-angle-double-right"></i> Details
-                  </a></td>
-                </tr>
-                <tr>
-                  <td scope="row">5</td>
-                  <td>Post Five</td>
-                  <td>Web Development</td>
-                  <td>July 15 2017</td>
-                  <td><a href="details.html" class="btn btn-secondary">
-                    <i class="fa fa-angle-double-right"></i> Details
-                  </a></td>
-                </tr>
-                <tr>
-                  <td scope="row">6</td>
-                  <td>Post Six</td>
-                  <td>Health & Wellness</td>
-                  <td>July 16, 2017</td>
-                  <td><a href="details.html" class="btn btn-secondary">
-                    <i class="fa fa-angle-double-right"></i> Details
-                  </a></td>
-                </tr>
+                <% if (content.length > 0){%>
+                <% content.forEach(function(x, i){ %>
+                  <tr>
+                    <td scope="row"><%= i+1 %></td>
+                    <td><%= x.title %></td>
+                    <td><%= x.hashtags %></td>
+                    <td><%= x.createdAt %></td>
+                    <td><a href="/dashboard/<%= x._id %>" class="btn btn-secondary">
+                      <i class="fa fa-angle-double-right"></i> Details
+                    </a></td>
+                  </tr>
+                <% }); %>
+                <% }else{ %>
+                  <tr>
+                    <td class="text-center font-italic" colspan="5">Haven't post a mate? <a href="#">Post now</a></td>
+                  </tr>
+                <% } %>
               </tbody>
             </table>
           </div>
@@ -116,7 +79,7 @@
             <div class="card-body">
               <h3>Posts</h3>
               <h1 class="display-4">
-                <i class="fa fa-pencil"></i> 6
+                <i class="fa fa-pencil"></i> <%= content.length %>
               </h1>
               <a href="posts.html" class="btn btn-outline-light btn-sm">View</a>
             </div>
@@ -146,15 +109,7 @@
     </div>
   </section>
 
-  <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
-    <div class="conatiner">
-      <div class="row">
-        <div class="col">
-          <p class="lead text-center">Copyright &copy; 2017 Blogen</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+
 
 
   <!-- POST MODAL -->
@@ -267,5 +222,5 @@
   <script>
       CKEDITOR.replace( 'editor1' );
   </script>
-</body>
-</html>
+
+<% include partials/footer %>

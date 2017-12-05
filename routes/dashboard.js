@@ -19,8 +19,8 @@ router.get('/', function(req, res){
 		}else {
 			var locations = {}, list = [];
 			dbContent.forEach(function(x){locations.lat = x.lat; locations.lng = x.lng; list.push(locations) });
-			res.render('dashboard/dashboard', {content:dbContent, currentUser: req.user, locations: list});
-			console.log('list',typeof list);
+			res.render('dashboard/dashboard', {content:dbContent, currentUser: req.user, locate_list: list});
+			console.log('list', list);
 		}
 	});
 });
@@ -43,9 +43,9 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 	};
 	geocoder.geocode(req.body.location, function (err, data) {
 		console.log('data.results[0]',data);
-    var lat = data.results[0].geometry.location.lat;
-    var lng = data.results[0].geometry.location.lng;
-    var location = data.results[0].formatted_address;
+    var lat = 'data.results[0].geometry.location.lat';
+    var lng = 'data.results[0].geometry.location.lng';
+    var location = 'data.results[0].formatted_address';
 	var newContent	= {
 			title:title,
 			location:location, 
@@ -55,7 +55,7 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			author: author,
 			text:text, 
 			hashtags:hashtags,
-			location: location, lat: lat, lng: lng
+			location: location, lat: 'lat', lng: 'lng'
 		};
 	//create a new himate and save to db
 	hiMate.create(newContent, function(err, newContent){

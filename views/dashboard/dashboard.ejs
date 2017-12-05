@@ -4,32 +4,23 @@
 		<p>Find your mates from all over the campus.</p>
 		<a class="btn btn-outline-dark btn-lg" href="dashboard/new">Add New Mate</a>
 	</header>
-	<div class="row">
-	<div class="col-lg-10 col-md-10 col-sm-10" id="map" height="460px" width="100%"></div>
-    <!--<div id="form">-->
-    <!--  <table>-->
-    <!--  <tr><td>Name:</td> <td><input type='text' id='name'/> </td> </tr>-->
-    <!--  <tr><td>Address:</td> <td><input type='text' id='address'/> </td> </tr>-->
-    <!--  <tr><td>Type:</td> <td><select id='type'> +-->
-    <!--             <option value='bar' SELECTED>bar</option>-->
-    <!--             <option value='restaurant'>restaurant</option>-->
-    <!--             </select> </td></tr>-->
-    <!--             <tr><td></td><td><input type='button' value='Save' onclick='saveData()'/></td></tr>-->
-    <!--  </table>-->
-    <!--</div>-->
-    </div>
+	<div class="row" style="">
+	  <div class="col-lg-1 col-md-1 col-sm-1"></div>
+	<div class="col-lg-10 col-md-10 col-sm-10" id="map" style="height:300px"></div>
+  <div class="col-lg-1 col-md-1 col-sm-1"></div>
+  </div>
 	<br/>
 	<div class="row text-center" style="display:flex; flex-wrap:wrap">
 		<% content.forEach(function(x){ %>
 		<div class="col-md-3 col-sm-6">
-			<div class="card">	
+			<div class="card" id="dash-card">	
 			  <div class="card-body">
 				<h5 class="card-title"><%= x.title %></h5>
 				<div class="card-text">
 					<p>
 						<a class="btn btn-outline-dark" href="/dashboard/<%= x._id %>">More Info</a>
 					</p>
-					<h6 class="card-footer bg-light">
+					<h6 >
 					  Tags: <% x.hashtags.split(',').forEach(function(x){ %>
 					  <span class="badge badge-dark"><%= x %></span>
 					  <% }) %></span>
@@ -55,6 +46,8 @@
         // Note: The code uses the JavaScript Array.prototype.map() method to
         // create an array of markers based on a given "locations" array.
         // The map() method here has nothing to do with the Google Maps API.
+        var locations = <%- JSON.stringify(locate_list) %>;
+        console.log('locations', locations);
         var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
             position: location,
@@ -66,7 +59,7 @@
         var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
       }
-      <!--var locations = <%= locations %>-->
+      
       // var locations = [
       //   {lat: -31.563910, lng: 147.154312},
       //   {lat: -33.718234, lng: 150.363181},
@@ -93,78 +86,6 @@
       //   {lat: -43.999792, lng: 170.463352}
       // ]
     </script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-   <script>// add user-add data on map
-      //var map;
-      //var marker;
-      //var infowindow;
-      //var messagewindow;
-
-      //function initMap() {
-      //  var california = {lat: -37.796280, lng: 144.961245}; 
-      //  map = new google.maps.Map(document.getElementById('map'), {
-      //    center: california,
-      //    zoom: 13
-      //  });
-
-      //  infowindow = new google.maps.InfoWindow({
-      //    content: document.getElementById('form')
-      //  });
-
-      //  messagewindow = new google.maps.InfoWindow({
-      //    content: document.getElementById('message')
-      //  });
-
-      //  google.maps.event.addListener(map, 'click', function(event) {
-      //    marker = new google.maps.Marker({
-      //      position: event.latLng,
-      //      map: map
-      //    });
-
-
-      //    google.maps.event.addListener(marker, 'click', function() {
-      //      infowindow.open(map, marker);
-      //    });
-      //  });
-      //}
-
-      //function saveData() {
-      //  var name = escape(document.getElementById('name').value);
-      //  var address = escape(document.getElementById('address').value);
-      //  var type = document.getElementById('type').value;
-      //  var latlng = marker.getPosition();
-      //  var url = 'https://hiitsherby:WenYen0u0@ds123926.mlab.com:23926/himate';
-
-      //  downloadUrl(url, function(data, responseCode) {
-
-      //    if (responseCode == 200 && data.length <= 1) {
-      //      infowindow.close();
-      //      messagewindow.open(map, marker);
-      //    }
-      //  });
-      //}
-
-      //function downloadUrl(url, callback) {
-      //  var request = window.ActiveXObject ?
-      //      new ActiveXObject('Microsoft.XMLHTTP') :
-      //      new XMLHttpRequest;
-
-      //  request.onreadystatechange = function() {
-      //    if (request.readyState == 4) {
-      //      request.onreadystatechange = doNothing;
-      //      console.log('responseText',responseText);
-      //      callback(request.responseText, request.status);
-      //    }
-      //  };
-
-      //  request.open('GET', url, true);
-      //  request.send(null);
-      //}
-
-      //function doNothing () {
-      //}
-
-    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6WuNmyMxlCsDp-bkhkRAmaM1B_3smWkk&callback=initMap"></script>
 <% include ../partials/footer %>
