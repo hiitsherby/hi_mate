@@ -5,5 +5,4 @@ A simple demo app to let people find mates with same interests and join cool gro
 - Authentication with PassportJS.
 - Show time since posted with MomentJS.
 - Google Map API to auto fill-in and show location.
-<br>
 Link: https://protected-mountain-10197.herokuapp.com/
