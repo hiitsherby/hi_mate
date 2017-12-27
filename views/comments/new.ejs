@@ -1,6 +1,5 @@
 <% include ../partials/header %>
-<div class="row">
-<h1 style="text-align: center">Create New Comment to <%= content.title %></h1>
+<h1 class="text-center">Create New Comment to <%= content.title %></h1>
 <div style="width:30%; margin:20px auto">
 	<form action="/dashboard/<%= content._id %>/comments" method="POST">
 		<!--<div class="form-group">-->
@@ -12,8 +11,7 @@
 	<button class="btn btn-lg btn-primary btn-block">Submit!</button>
 	</form>
 	<br>
-	<a href="/dashboard">Go Back</a>
-</div>
+	<a href="/dashboard/<%= content._id %>">Go Back</a>
 </div>
 
 <% include ../partials/footer %>

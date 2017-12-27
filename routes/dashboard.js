@@ -17,8 +17,8 @@ router.get('/', function(req, res){
 		if (err){
 			console.log(err);
 		}else {
-			var locations = {}, list = [];
-			dbContent.forEach(function(x){locations.lat = x.lat; locations.lng = x.lng; list.push(locations) });
+			var list = [];
+			dbContent.forEach(function(x){locations = {}; locations.lat = x.lat; locations.lng = x.lng; list.push(locations);  });
 			res.render('dashboard/dashboard', {content:dbContent, currentUser: req.user, locate_list: list});
 			console.log('list', list);
 		}
@@ -42,10 +42,19 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			username: req.user.username
 	};
 	geocoder.geocode(req.body.location, function (err, data) {
-		console.log('data.results[0]',data);
-    var lat = 'data.results[0].geometry.location.lat';
-    var lng = 'data.results[0].geometry.location.lng';
-    var location = 'data.results[0].formatted_address';
+	if (err){
+			console.log(err);
+			req.flash('error', err.message);
+			res.redirect('back');		
+	}else if (data.results[0] == undefined){
+		console.log('data.results[0] problem:', data.results[0]);
+		req.flash('error', 'Over Google Map API request limit. Please try agian tomorrow.');
+		res.redirect('back');		
+	}else{
+	console.log('post data',data);
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    var location = data.results[0].formatted_address;
 	var newContent	= {
 			title:title,
 			location:location, 
@@ -55,7 +64,7 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			author: author,
 			text:text, 
 			hashtags:hashtags,
-			location: location, lat: 'lat', lng: 'lng'
+			location: location, lat: lat, lng: lng
 		};
 	//create a new himate and save to db
 	hiMate.create(newContent, function(err, newContent){
@@ -68,6 +77,7 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			res.redirect('/dashboard');
 		}
 	});
+	}
   });
 });
 //=================
@@ -109,12 +119,22 @@ router.get('/:id/edit', middleware.postOwnership, function(req, res){
 //================
 router.put('/:id', middleware.postOwnership, function(req, res){
 	geocoder.geocode(req.body.location, function (err, data) {
-		console.log('data.results[0]',data);
+	if (err){
+		console.log(err);
+		req.flash('error', err.message);
+		res.redirect('back');		
+	}else if (data.results[0] == undefined){
+		console.log('data.results[0] problem:', data.results[0]);
+		req.flash('error', 'Over Google Map API request limit. Please try agian tomorrow.');
+		res.redirect('back');		
+	}else{
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;
-    var newData = req.body.edit + {location: location, lat: lat, lng: lng};
+    var newData = req.body.edit;
 	//update correspondant himate and save to db
+	console.log('newData:', req.body.edit.title);
+	console.log('req.params.id', req.params.id);
 	hiMate.findByIdAndUpdate(req.params.id, newData, function(err, editContent){
 		if (err){
 			console.log(err);
@@ -125,7 +145,8 @@ router.put('/:id', middleware.postOwnership, function(req, res){
 			req.flash('success', 'Successfully updated');
 			res.redirect('/dashboard/'+req.params.id);
 		}
-	});	
+	});
+	}	
   });
 });
 //================
