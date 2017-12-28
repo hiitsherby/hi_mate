@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>hiMate</title>
-	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
-	<link rel="stylesheet" href="/stylesheets/main.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  	<title>hiMate</title>
+  	<link rel="stylesheet" href="/stylesheets/main.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
-	
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-2">
+  <!--<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-2">-->
+  <nav class="navbar navbar-toggleable-md navbar-toggleable-sm navbar-dark bg-dark bg-faded">
       <a href="/" class="navbar-brand">hiMate</a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item px-2">
             <a href="/dashboard" class="nav-link active">Dashboard</a>
           </li>
@@ -28,9 +30,7 @@
           <!--<li class="nav-item px-2">-->
           <!--  <a href="/user" class="nav-link">Users</a>-->
           <!--</li>-->
-        </ul>
-
-        <ul class="navbar-nav ml-auto">
+  
     	<% if (!currentUser){ %>
 				<li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
 				<li class="nav-item"><a href="/register" class="nav-link">Sign Up</a></li>

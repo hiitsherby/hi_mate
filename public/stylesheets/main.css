@@ -1,3 +1,5 @@
+td { word-wrap:break-word }
+
 .table>tbody>tr>td, .table>tbody>tr>th {
     padding: 20px !important;
 }

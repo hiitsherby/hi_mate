@@ -1,5 +1,4 @@
 <% include ../partials/header %>
-
 <div class="row">
     <div class="col-md-3">
         <p class="lead">hiMate</p>
@@ -16,7 +15,7 @@
         <br>
         <div id="map"></div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 col-sm-9">
         <div class="thumbnail card">
           <!-- info panel contents -->
           <div class="card-header bg-dark text-white">
@@ -65,10 +64,11 @@
             <div class="text-right">
                 <a class="btn btn-success" href="/dashboard/<%= foundContent._id%>/comments/new">Add a Comment</a>
            </div>
+           <br>
                 <% foundContent.comments.forEach(function(comment){ %>
                     <div class="row">
-                        <div class="col-md-12">
-                            <strong><%= comment.author.username %></strong>
+                        <div class="col-md-12 col-sm-12">
+                            <strong><%= comment.author.username %></strong><br>
                             <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                                 <a class="btn btn-sm btn-warning" href="/dashboard/<%= foundContent._id%>/comments/<%=comment._id%>/edit">Edit</a>
                                 <form id="delete-form" action="/dashboard/<%= foundContent._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">

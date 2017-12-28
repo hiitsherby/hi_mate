@@ -12,17 +12,31 @@ var geocoder = require('geocoder');
 //GET DASHBOARD
 //=============
 router.get('/', function(req, res){
+	if (req.query.search){
+		const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+		hiMate.find({title: regex}, function(err, dbContent){
+				if (err){
+					console.log(err);
+				}else {
+					var list = [];
+					dbContent.forEach(function(x){locations = {}; locations.lat = x.lat; locations.lng = x.lng; list.push(locations);  });
+					res.render('dashboard/dashboard', {content:dbContent, currentUser: req.user, locate_list: list});
+					console.log('list', list);
+				}
+			});
+	}else{
 	//get all content from db
-	hiMate.find({}, function(err, dbContent){
-		if (err){
-			console.log(err);
-		}else {
-			var list = [];
-			dbContent.forEach(function(x){locations = {}; locations.lat = x.lat; locations.lng = x.lng; list.push(locations);  });
-			res.render('dashboard/dashboard', {content:dbContent, currentUser: req.user, locate_list: list});
-			console.log('list', list);
-		}
-	});
+		hiMate.find({}, function(err, dbContent){
+			if (err){
+				console.log(err);
+			}else {
+				var list = [];
+				dbContent.forEach(function(x){locations = {}; locations.lat = x.lat; locations.lng = x.lng; list.push(locations);  });
+				res.render('dashboard/dashboard', {content:dbContent, currentUser: req.user, locate_list: list});
+				console.log('list', list);
+			}
+		});
+	}
 });
 
 //==============
@@ -166,5 +180,9 @@ router.delete('/:id', middleware.postOwnership, function(req, res){
 		}
 	});	
 });
+
+function escapeRegex(str) {
+  return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
 
 module.exports = router;

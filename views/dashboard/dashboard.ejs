@@ -1,8 +1,16 @@
 <% include ../partials/header %>
 	<header class="jumbotron bg-light">
 		<h1>Welcome to hiMate</h1>
-		<p>Find your mates from all over the campus.</p>
+		<p>Find your mates from all over the wolrd.</p>
 		<a class="btn btn-outline-dark btn-lg" href="dashboard/new">Add New Mate</a>
+		<p>
+		    <form action="/dashboard" method="GET" class="form-inline">
+		        <div class="form-group">
+		            <input type="text" name="search" placeholder="Search..." class="form-control">
+		            <input type="submit" value="search" class="btn btn-default">
+		        </div>
+		    </form>
+		</p>
 	</header>
 	<div class="row" style="">
 	  <div class="col-lg-1 col-md-1 col-sm-1"></div>
@@ -10,9 +18,9 @@
   <div class="col-lg-1 col-md-1 col-sm-1"></div>
   </div>
 	<br/>
-	<div class="row text-center" style="display:flex; flex-wrap:wrap">
+	<div class="row text-center" style="display:flex; flex-wrap:wrap; margin-bottom: 8%">
 		<% content.forEach(function(x){ %>
-		<div class="col-md-3 col-sm-6">
+		<div class="col-md-3 col-sm-10">
 			<div class="card" id="dash-card">	
 			  <div class="card-body">
 				<h5 class="card-title"><%= x.title %></h5>
