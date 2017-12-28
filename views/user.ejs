@@ -15,7 +15,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
+          <a href="/dashboard/new" class="btn btn-primary btn-block">
+          <!--<a href="/dashboard/new" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">-->
             <i class="fa fa-plus"></i> Add Post
           </a>
         </div>
@@ -59,7 +60,7 @@
                     <td scope="row"><%= i+1 %></td>
                     <td><%= x.title %></td>
                     <td><%= x.hashtags %></td>
-                    <td><%= x.createdAt %></td>
+                    <td><%= String(x.createdAt).substring(0, 24) %></td>
                     <td><a href="/dashboard/<%= x._id %>" class="btn btn-secondary">
                       <i class="fa fa-angle-double-right"></i> Details
                     </a></td>
@@ -81,7 +82,7 @@
               <h1 class="display-4">
                 <i class="fa fa-pencil"></i> <%= content.length %>
               </h1>
-              <a href="posts.html" class="btn btn-outline-light btn-sm">View</a>
+              <a href="#" class="btn btn-outline-light btn-sm">View</a>
             </div>
           </div>
 
@@ -160,7 +161,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header bg-success text-white">
-          <h5 class="modal-title">Add Category</h5>
+          <h5 class="modal-title">Add Category (please note this is undone)</h5>
           <button class="close" data-dismiss="modal"><span>&times;</span></button>
         </div>
         <div class="modal-body">

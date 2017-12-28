@@ -48,7 +48,7 @@ router.post('/',  middleware.isLoggedIn, function(req, res){
 			res.redirect('back');		
 	}else if (data.results[0] == undefined){
 		console.log('data.results[0] problem:', data.results[0]);
-		req.flash('error', 'Over Google Map API request limit. Please try agian tomorrow.');
+		req.flash('error', 'Exceed Google Map API request limit. Please try agian tomorrow.');
 		res.redirect('back');		
 	}else{
 	console.log('post data',data);
@@ -125,7 +125,7 @@ router.put('/:id', middleware.postOwnership, function(req, res){
 		res.redirect('back');		
 	}else if (data.results[0] == undefined){
 		console.log('data.results[0] problem:', data.results[0]);
-		req.flash('error', 'Over Google Map API request limit. Please try agian tomorrow.');
+		req.flash('error', 'Exceed Google Map API request limit. Please try agian tomorrow.');
 		res.redirect('back');		
 	}else{
     var lat = data.results[0].geometry.location.lat;
